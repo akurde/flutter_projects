@@ -1,5 +1,6 @@
+import 'package:expense_app/presentation/screens/on_board/login_page.dart';
+import 'package:expense_app/presentation/screens/splash/splash_page.dart';
 import 'package:flutter/material.dart';
-import 'package:expense_app/presentation/screens/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Expense app',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: SplashPage(),
     );
   }
 }

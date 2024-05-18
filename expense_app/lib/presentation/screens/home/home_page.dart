@@ -1,8 +1,10 @@
 
 import 'package:expense_app/domain/ui_helper.dart';
-import 'package:expense_app/presentation/screens/expense_list_view.dart';
+import 'package:expense_app/presentation/screens/add_expense/add_expense_page.dart';
+import 'package:expense_app/presentation/screens/home/expense_list_view.dart';
+import 'package:expense_app/presentation/screens/home/profile_page.dart';
 import 'package:expense_app/presentation/screens/home/statistic_page.dart';
-import 'package:expense_app/presentation/screens/total_expense_view.dart';
+import 'package:expense_app/presentation/screens/home/total_expense_view.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget{
@@ -13,19 +15,19 @@ class HomePage extends StatefulWidget{
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
 
-  List<Widget> navPage = [
+  List<Widget> tabPageList = [
     ExpensesHomePage(),
     StatisticPage(),
-    Center(child: Text('data'),),
+    AddExpenseScreen(balance: 0,),
     Center(child: Text('notification'),),
-    Center(child: Text('profile'),),
+    ProfilePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(mTitle: 'Home'),
-      body: navPage[selectedIndex],
+      //appBar: MyAppBar(mTitle: 'Home'),
+      body: tabPageList[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
@@ -113,7 +115,7 @@ Widget ExpensesHomePage(){
                           ),),
                         ],
                       ),
-                      SizedBox(width: 110,),
+                      SizedBox(width: 100,),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue[50],
@@ -124,7 +126,12 @@ Widget ExpensesHomePage(){
                         onPressed: (){
                                       
                         }, 
-                        child: Text('This Month')
+                        child: Row(
+                          children: [
+                            Text('This Month'),
+                            Icon(Icons.arrow_drop_down_outlined)
+                          ],
+                        )
                       )
                     ],
                   ),
