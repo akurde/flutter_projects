@@ -4,14 +4,35 @@ class AppConstant{
 
   static const String PEXELS_API_KEY = "Iybr0n2erxR8vBVWQF8lAKlvsaB7MwtAIPUAPca3HOlZRu9WdHbqwZT2";
 
-  static const List<Color> mColors = [
-    Color(0xffFDB7B8),
-    Color(0xff4164DF),
-    Color(0xff6040E0),
-    Color(0xff5FBFC1),
-    Color(0xff292929),
-    Color(0xffFF9A0B),
-    Color(0xffB647EB),
+  static const List<Map<String, dynamic>> mColors = [
+    {
+      'color':Color(0xffFDB7B8),
+      'code':'FDB7B8',
+    },
+    {
+      'color':Color(0xff4164DF),
+      'code':'4164DF',
+    },
+    {
+      'color':Color(0xff6040E0),
+      'code':'6040E0',
+    },
+    {
+      'color':Color(0xff5FBFC1),
+      'code':'5FBFC1',
+    },
+    {
+      'color':Color(0xff292929),
+      'code':'292929',
+    },
+    {
+      'color':Color(0xffFF9A0B),
+      'code':'FF9A0B',
+    },
+    {
+      'color':Color(0xffB647EB),
+      'code':'B647EB',
+    },
   ];
 
   static const List<Map<String, dynamic>> mCategory = [

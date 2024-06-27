@@ -1,0 +1,36 @@
+class AppConstant{
+    static const List<Map<String, dynamic>> mData = [
+      {
+        "img":"",
+        "title":"Philosophy",
+      },
+      {
+        "img":"",
+        "title":"Sports",
+      },
+      {
+        "img":"",
+        "title":"Technology",
+      },
+      {
+        "img":"",
+        "title":"Science",
+      },
+      {
+        "img":"",
+        "title":"Entertainment",
+      },
+      {
+        "img":"",
+        "title":"Business",
+      },
+      {
+        "img":"",
+        "title":"Health",
+      },
+      {
+        "img":"",
+        "title":"General",
+      },
+    ];
+}

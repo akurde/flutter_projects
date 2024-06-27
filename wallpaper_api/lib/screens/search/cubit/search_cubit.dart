@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallpaper_api/data/repository/wallpaper_repo.dart';
 import 'package:wallpaper_api/model/wallpaper_model.dart';
@@ -7,12 +8,12 @@ class SearchCubit extends Cubit<SearchState>{
   WallpaperRepository wallpaperRepository;
   SearchCubit({required this.wallpaperRepository}) : super(SearchInitialState());
 
-  void getSearchWallpaper({required String query}) async{
+  void getSearchWallpaper({required String query, String color = "", int page = 1}) async{
     emit(SearchLoadingState());
     try{
-      var mData=  await wallpaperRepository.getSearchWallpaper(query);
+      var mData = await wallpaperRepository.getSearchWallpaper(query, mColor: color, mPage : page);
       WallpaperModel wallpaperModel = WallpaperModel.fromJson(mData);
-      emit(SearchLoadedState(listPhotos: wallpaperModel.photos!));
+      emit(SearchLoadedState(listPhotos: wallpaperModel.photos!, totalWallpapers: wallpaperModel.totalResults!, ));
     } catch(e){
         emit(SearchErrorState(errorMsg: e.toString()));
     }

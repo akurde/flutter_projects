@@ -1,8 +1,6 @@
 import 'package:wallpaper_api/model/wallpaper_model.dart';
 
-abstract class SearchState{
-
-}
+abstract class SearchState{}
 
 class SearchInitialState extends SearchState{}
 
@@ -10,7 +8,9 @@ class SearchLoadingState extends SearchState{}
 
 class SearchLoadedState extends SearchState{
   List<Photo> listPhotos;
-  SearchLoadedState({required this.listPhotos});
+
+  int totalWallpapers;
+  SearchLoadedState({required this.listPhotos, required this.totalWallpapers});
 
 }
 

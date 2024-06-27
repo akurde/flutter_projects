@@ -6,9 +6,9 @@ class WallpaperRepository {
 
   WallpaperRepository({required this.apiHelper});
 
-  Future<dynamic> getSearchWallpaper(String mQuery) async{
+  Future<dynamic> getSearchWallpaper(String mQuery, {String mColor = "", int mPage = 1}) async{
       try{
-        return apiHelper.getAPI(url: '${AppUrls.SEARCH_WALLPAPER_URL}?query=$mQuery');
+        return apiHelper.getAPI(url: '${AppUrls.SEARCH_WALLPAPER_URL}?query=$mQuery&color=$mColor&page=$mPage');
       } catch(e){
           throw(e);
       }
@@ -17,7 +17,7 @@ class WallpaperRepository {
 
   Future<dynamic> getTrendingWallpaper() async{
       try{
-        return apiHelper.getAPI(url: AppUrls.TRENDING_WALLPAPER_URL);
+        return await apiHelper.getAPI(url: AppUrls.TRENDING_WALLPAPER_URL);
       } catch(e){
           throw(e);
       }

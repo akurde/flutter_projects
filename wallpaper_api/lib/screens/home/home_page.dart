@@ -4,6 +4,7 @@ import 'package:wallpaper_api/app_widget/wallpaper_bg_widget.dart';
 import 'package:wallpaper_api/constants/app_constant.dart';
 import 'package:wallpaper_api/data/remote/api_helper.dart';
 import 'package:wallpaper_api/data/repository/wallpaper_repo.dart';
+import 'package:wallpaper_api/screens/detail_wallpaper_page.dart';
 import 'package:wallpaper_api/screens/home/cubit/home_cubit.dart';
 import 'package:wallpaper_api/screens/home/cubit/home_state.dart';
 import 'package:wallpaper_api/screens/search/cubit/search_cubit.dart';
@@ -38,8 +39,12 @@ class _HomePageState extends State<HomePage>{
           // 2
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+
+            // Search Wallpaper 
+
             child: TextField(
               controller: searchController,
+              style: mTextStyle12(),
               decoration: InputDecoration(
                 suffixIcon: InkWell(
                   onTap: (){
@@ -106,7 +111,12 @@ class _HomePageState extends State<HomePage>{
 
                           return Padding(
                               padding: EdgeInsets.only(left: 11, right: index == state.listPhotos.length - 1 ? 11 : 0),
-                              child: WallpaperBgWidget(imgUrl: eachPhotos.src!.potrait!),
+                              child: InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => DetailWallpaperPage(imgModel: eachPhotos.src!,)));
+                                },
+                                child: WallpaperBgWidget(imgUrl: eachPhotos.src!.potrait!)
+                              ),
                           );
                           
                     });
@@ -129,7 +139,16 @@ class _HomePageState extends State<HomePage>{
               itemBuilder: (_,index){
                 return Padding(
                   padding: EdgeInsets.only(left: 11, right: index == AppConstant.mColors.length - 1 ? 11 : 0),
-                  child: getColorToneWidget(AppConstant.mColors[index]),
+                  child: InkWell(
+                    onTap: (){
+                        Navigator.push(context, MaterialPageRoute(
+                        builder: (c) => BlocProvider(create: (c) => SearchCubit(wallpaperRepository: WallpaperRepository(apiHelper: ApiHelper())),
+                          child: SearchedWallpaperPage(query: searchController.text.isNotEmpty ? searchController.text : "Nature", color: AppConstant.mColors[index]['code']),
+                        ))
+                      );
+                    },
+                    child: getColorToneWidget(AppConstant.mColors[index]['color'])
+                  ),
                 );
               }
             ),
@@ -145,7 +164,7 @@ class _HomePageState extends State<HomePage>{
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: GridView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              //physics: NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 11,
@@ -154,7 +173,20 @@ class _HomePageState extends State<HomePage>{
               ), 
               itemCount: AppConstant.mCategory.length,
               itemBuilder: (_,index){
-                return getCategoryWidget(AppConstant.mCategory[index]['image'], AppConstant.mCategory[index]['title']);
+                return InkWell(
+                  onTap: (){
+                    Navigator.push(context, 
+                        MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => SearchCubit(wallpaperRepository: WallpaperRepository(apiHelper: ApiHelper())),
+                              child: SearchedWallpaperPage(query: AppConstant.mCategory[index]['title']),
+                            )));
+                  },
+                  child: getCategoryWidget(
+                        AppConstant.mCategory[index]['image'], 
+                        AppConstant.mCategory[index]['title']
+                      ),
+                );
               }
             ),
           ),

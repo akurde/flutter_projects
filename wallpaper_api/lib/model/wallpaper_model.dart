@@ -17,9 +17,9 @@ class WallpaperModel{
 
         return WallpaperModel(
           page: json['page'],
-          per_page: json['peer_page'],
-          totalResults: json['totalResults'],
-          nextPage: json['nextPage'],
+          per_page: json['per_page'],
+          totalResults: json['total_results'],
+          nextPage: json['next_page'],
           photos: mPhoto
         );
     }
@@ -46,8 +46,6 @@ class Photo{
         // for(Map<String, dynamic> eachSrc in json['src']){
         //     mSrc.add(Src.fromJson(eachSrc));
         // }
-
-
         return Photo(
           id: json['id'],
           width: json['width'],

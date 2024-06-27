@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as httpclient;
 import 'package:wallpaper_api/data/remote/app_exception.dart';
+import 'package:wallpaper_api/model/wallpaper_model.dart';
  
 class ApiHelper{
   Future<dynamic> getAPI({required String url}) async {
@@ -12,19 +13,19 @@ class ApiHelper{
         var res = await httpclient.get(uri, headers: {
           "Authorization": "Iybr0n2erxR8vBVWQF8lAKlvsaB7MwtAIPUAPca3HOlZRu9WdHbqwZT2"
         });
-        return returnJsonResponse(res);
+        var res1 = returnJsonResponse(res);
+        return res1;
       } on SocketException catch (e){
         throw (FetchDataException(errorMsg:"No Internet!!"));
       }
 
   }
   
-  Future<dynamic> returnJsonResponse(httpclient.Response response) {
+  dynamic returnJsonResponse(httpclient.Response response) {
     switch(response.statusCode){
       case 200:
           {
-            var mData = jsonDecode(response.body);
-            
+            dynamic mData = jsonDecode(response.body);
             return mData;
           }
       case 400:
